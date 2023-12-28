@@ -1,6 +1,9 @@
-.cateory-container {
+.category-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+
+  flex-direction: column;
   column-gap: 20px;
+  justify-content: space-around;
   row-gap: 50px;
 }

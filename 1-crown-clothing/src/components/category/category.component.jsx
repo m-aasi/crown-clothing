@@ -5,10 +5,13 @@ import { useParams } from "react-router-dom";
 import ProductCard from "../product-card/product-card.component";
 import "./category.styles.scss";
 import NavigationBar from "../navigation-bar/navigation.component";
+import Spinner from "../spinner/spinner.component";
 export default function Category() {
   const { category } = useParams();
   // const { categoriesMap } = useCategories();
   const categoriesMap = useSelector((state) => state.categories.categoriesMap);
+  const isLoading = useSelector((state) => state.categories.isLoading);
+
   const [products, setProducts] = useState([categoriesMap[category]]);
 
   useEffect(() => {
@@ -21,11 +24,15 @@ export default function Category() {
   return (
     <>
       <NavigationBar />
-      <div className="category-container">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div className="category-container">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
     </>
   );
 }

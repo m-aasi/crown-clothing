@@ -28,24 +28,28 @@ export default function categoriesReducer(
 export function setCategoriesMap(categoryMap) {
   return { type: "categories/setCategoriesMap", payLoad: categoryMap };
 }
-
-export function fetchCategoriesStart() {}
-export function fetchCategoriesSuccess() {
-  return async function (dispatch) {
-    dispatch({ type: "categories/fetchCategoriesStart" });
-    try {
-      const categoryMap = await getCategoriesAndDocuments();
-      console.log(categoryMap);
-      dispatch({
-        type: "categories/fetchCategoriesSuccess",
-        payLoad: categoryMap,
-      });
-    } catch (error) {
-      return { type: "categories/fetchCategoriesFailed", payLoad: error };
-    } finally {
-    }
-  };
+export function fetchCategoriesStart() {
+  return { type: "categories/fetchCategoriesStart" };
 }
-export function fetchCategoriesFailed() {
-  return { type: "categories/fetchCategoriesFailed" };
+// export function fetchCategoriesSuccess() {
+//   return async function (dispatch) {
+//     dispatch({ type: "categories/fetchCategoriesStart" });
+//     try {
+//       const categoryMap = await getCategoriesAndDocuments();
+//       console.log(categoryMap);
+//       dispatch({
+//         type: "categories/fetchCategoriesSuccess",
+//         payLoad: categoryMap,
+//       });
+//     } catch (error) {
+//       return { type: "categories/fetchCategoriesFailed", payLoad: error };
+//     }
+//   };
+// }
+
+export function fetchCategoriesSuccess(categoryMap) {
+  return { type: "categories/fetchCategoriesSuccess", payLoad: categoryMap };
+}
+export function fetchCategoriesFailed(error) {
+  return { type: "categories/fetchCategoriesFailed", payLoad: error };
 }
