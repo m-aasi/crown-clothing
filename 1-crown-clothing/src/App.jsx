@@ -42,7 +42,7 @@ const categories = [
 
 function App() {
   const isCheckOut = useSelector((state) => state.cart.isCheckOut);
-  // const { isCheckOut } = useCart();
+
   const dispatch = useDispatch();
   useEffect(function () {
     const unsubscribe = onAuthStateChangedListner((user) => {
@@ -50,7 +50,6 @@ function App() {
         createUserDocumentFromAuth(user);
       }
 
-      // dispatch({ type: "user/setCurrentUser", payLoad: user });
       dispatch(setCurrentUser(user));
     });
 
