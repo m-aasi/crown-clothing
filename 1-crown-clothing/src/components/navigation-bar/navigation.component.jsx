@@ -1,15 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
-// import { useUserContext } from "../../contexts/userContext";
+import { setCurrentUser } from "../../features/user/userSlice";
 import { signOutUser } from "../../utils/firebase.utils";
-// import { useCart } from "../../contexts/cartContext";
 
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import "./navigation.styles.scss";
 import CheckOut from "../../pages/checkoutPage";
-import { setCurrentUser } from "../../store/store";
 
 export default function NavigationBar() {
   // const { currentUser, setCurrentUser } = useUserContext();

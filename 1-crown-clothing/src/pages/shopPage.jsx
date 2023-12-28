@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getCategoriesAndDocuments } from "../utils/firebase.utils";
-import { setCategoriesMap } from "../store/store";
+
+import { setCategoriesMap } from "../features/categories/categoriesSlice";
 
 import Category from "../components/category/category.component";
 import CategoryPreviewPage from "./categoryPreviewPage";

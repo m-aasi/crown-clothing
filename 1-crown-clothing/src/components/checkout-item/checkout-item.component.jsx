@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   addToCartItems,
   decreaseToCartItems,
   deleteCartItems,
-} from "../../store/store";
+} from "../../features/cart/cartSlice";
 
 import "./checkout-item.styles.scss";
 

@@ -1,24 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
-import { setIsCartOpen } from "../../store/store";
+import { setIsCartOpen } from "../../features/cart/cartSlice";
 
 import "./cart-icon.styles.scss";
 
 import "../../assets/shopping-bag.svg";
 
-// import { useCart } from "../../contexts/cartContext";
-
 export default function CartIcon() {
-  // const { isCartOpen, dispatch } = useCart();
-
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
-  console.log(totalQuantity);
+
   const dispatch = useDispatch();
 
-  // const { totalQuantity } = useCart();
-  console.log(totalQuantity);
   function handleOnClick() {
-    // setIsCartOpen(!isCartOpen);
-    // dispatch({ type: "cart/setIsCartOpen" });
     dispatch(setIsCartOpen());
   }
   return (

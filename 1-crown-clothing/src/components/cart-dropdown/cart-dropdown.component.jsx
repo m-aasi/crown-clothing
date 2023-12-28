@@ -1,11 +1,11 @@
 import { useCart } from "../../contexts/cartContext";
+import { setIsCheckOut } from "../../features/cart/cartSlice";
 import CartItem from "../cart-item/cart-item.component";
 
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../button/button.component";
 import "./cart-dropdown.styles.scss";
-import { setIsCheckOut } from "../../store/store";
 
 export default function CartDropdown() {
   // const { cartItems, isCheckOut, dispatch } = useCart();
