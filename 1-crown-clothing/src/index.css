@@ -1,0 +1,7 @@
+body {
+  margin: 0;
+  padding: 20px 40px;
+  font-family: "Fira Sans Condensed", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -mos-osx-font-smoothing: grayscale;
+}
