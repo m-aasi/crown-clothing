@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   createUserDocumentFromAuth,
+  getCurrentUser,
   onAuthStateChangedListner,
 } from "./utils/firebase.utils.js";
-import { setCurrentUser } from "./features/user/userSlice.js";
+import { checkUserSession, setCurrentUser } from "./features/user/userSlice.js";
 import Directory from "./components/directory/directory.component.jsx";
 import Shop from "./pages/shopPage.jsx";
 import CheckOut from "./pages/checkoutPage.jsx";
@@ -45,15 +46,17 @@ function App() {
 
   const dispatch = useDispatch();
   useEffect(function () {
-    const unsubscribe = onAuthStateChangedListner((user) => {
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
+    dispatch(checkUserSession());
+    // getCurrentUser().then((user) => console.log(user));
+    // const unsubscribe = onAuthStateChangedListner((user) => {
+    //   if (user) {
+    //     createUserDocumentFromAuth(user);
+    //   }
 
-      dispatch(setCurrentUser(user));
-    });
+    //   dispatch(setCurrentUser(user));
+    // });
 
-    return unsubscribe;
+    // return unsubscribe;
   }, []);
   return (
     <BrowserRouter>

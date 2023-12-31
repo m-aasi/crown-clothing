@@ -10,6 +10,7 @@ export function* fetchCategories() {
   try {
     yield console.log("Fetching categories");
     const categoryMap = yield call(getCategoriesAndDocuments);
+    yield console.log(categoryMap);
 
     yield put(fetchCategoriesSuccess(categoryMap));
   } catch (error) {

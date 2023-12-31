@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -8,7 +9,8 @@ import {
 import FormInput from "../form-input/form-input.component";
 import "./sign-up.styles.scss";
 import Button from "../button/button.component";
-import { useUserContext } from "../../contexts/userContext";
+// import { useUserContext } from "../../contexts/userContext";
+import { signUpStart } from "../../features/user/userSlice";
 
 const defaultFormFields = {
   displayName: "",
@@ -18,6 +20,7 @@ const defaultFormFields = {
 };
 
 export default function SignUp() {
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
   // const { setCurrentUser } = useUserContext();
@@ -33,12 +36,14 @@ export default function SignUp() {
       alert("Your password does not match ");
       return;
     }
-    const res = await createAuthUserWithEmailAndPassword(email, password);
-    console.log(res);
-    if (!res) return;
-    const data = await createUserDocumentFromAuth(res.user, { displayName });
-    console.log(data);
-    // setCurrentUser(res.user);
+
+    dispatch(signUpStart(email, password, displayName));
+    // const res = await createAuthUserWithEmailAndPassword(email, password);
+    // console.log(res);
+    // if (!res) return;
+    // const data = await createUserDocumentFromAuth(res.user, { displayName });
+    // console.log(data);
+    // // setCurrentUser(res.user);
 
     resetFormFields();
   }
@@ -47,8 +52,6 @@ export default function SignUp() {
     const { name, value } = e.target;
     setFormFields({ ...formFields, [name]: value });
   }
-
-  console.log(formFields);
 
   return (
     <div className="sign-up-container">

@@ -101,7 +101,7 @@ export async function createUserDocumentFromAuth(user, additionalInfo) {
     } catch (error) {
       console.log("There was an error in creating user", error.message);
     }
-    return userDocRef;
+    return userSnapShot;
   }
 }
 
@@ -127,4 +127,17 @@ export function onAuthStateChangedListner(callback) {
 export async function storeProductInDb() {
   const userDocRef = doc(db, "product", id);
   console.log(userDocRef);
+}
+
+export function getCurrentUser() {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
 }

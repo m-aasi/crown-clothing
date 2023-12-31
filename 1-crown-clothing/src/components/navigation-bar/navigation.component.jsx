@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentUser } from "../../features/user/userSlice";
+import { setCurrentUser, signOutStart } from "../../features/user/userSlice";
 import { signOutUser } from "../../utils/firebase.utils";
 
 import CartIcon from "../cart-icon/cart-icon.component";
@@ -12,7 +12,8 @@ export default function NavigationBar() {
   // const { currentUser, setCurrentUser } = useUserContext();
   // const { currentUser, dispatch } = useUserContext();
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.currentUser);
+  const currentUser = useSelector((state) => state.user.currentUser);
+
   const { isCartOpen, isCheckOut } = useSelector((state) => state.cart);
 
   // const { isCartOpen, isCheckOut } = useCart();
@@ -20,8 +21,9 @@ export default function NavigationBar() {
   // console.log(currentUser);
 
   async function handleSignOut() {
-    const res = await signOutUser();
-    console.log(res);
+    dispatch(signOutStart());
+    // const res = await signOutUser();
+    // console.log(res);
     // setCurrentUser(null);
     // dispatch({ type: "user/setCurrentUser", payLoad: null });
     dispatch(setCurrentUser(null));

@@ -1,5 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  emailSignInStart,
+  googleSignInStart,
+  setCurrentUser,
+} from "../../features/user/userSlice";
 import {
   auth,
   createAuthUserWithEmailAndPassword,
@@ -7,7 +13,7 @@ import {
   signInUserWithEmailAndPassword,
   userAuthWithGooglePopup,
 } from "../../utils/firebase.utils";
-import { useUserContext } from "../../contexts/userContext";
+// import { useUserContext } from "../../contexts/userContext";
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
@@ -20,10 +26,12 @@ const defaultFormFields = {
 };
 
 export default function SignIn() {
-  const { currentUser, dispatch } = useUserContext();
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user.currentUser);
+  // const { currentUser, dispatch } = useUserContext();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-  console.log(currentUser);
+
   function resetFormFields() {
     setFormFields(defaultFormFields);
   }
@@ -32,12 +40,13 @@ export default function SignIn() {
     e.preventDefault();
 
     try {
-      const res = await signInUserWithEmailAndPassword(email, password);
-      console.log(res);
-      if (!res) return;
-      // const data = await createUserDocumentFromAuth(res.user, { displayName });
-      // setCurrentUser(res.user);
-      dispatch({ type: "user/setCurrentUser", payLoad: res.user });
+      dispatch(emailSignInStart(email, password));
+      // const res = await signInUserWithEmailAndPassword(email, password);
+      // console.log(res);
+      // if (!res) return;
+
+      // // dispatch({ type: "user/setCurrentUser", payLoad: res.user });
+      // dispatch(setCurrentUser(res.user));
 
       resetFormFields();
     } catch (error) {
@@ -49,23 +58,23 @@ export default function SignIn() {
     console.log("run");
     async function googlePopUp() {
       try {
-        const res = await userAuthWithGooglePopup();
-        console.log(res);
-        if (!res) return;
+        dispatch(googleSignInStart());
+        // const res = await userAuthWithGooglePopup();
+        // console.log(res);
+        // if (!res) return;
 
-        // const data = await createUserDocumentFromAuth(res.user);
-        const { user } = await createUserDocumentFromAuth(res);
-
-        // setCurrentUser(user);
+        // // const data = await createUserDocumentFromAuth(res.user);
+        // console.log(res.user);
+        // const user = await createUserDocumentFromAuth(res.user);
+        // console.log(user);
       } catch (error) {
         switch (error.code) {
           case "auth/user-not-found":
             alert("Invalid email, User don't exist");
 
-            break;
           case "auth/wrong-password":
-            alert("incorrect password ");
-            break;
+            return alert("incorrect password ");
+
           default:
             throw new Error("error");
         }
