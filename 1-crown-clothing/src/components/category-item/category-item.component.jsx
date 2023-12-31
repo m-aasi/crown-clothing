@@ -1,6 +1,6 @@
 import "./category-item.styles.css";
-export default function CategoryItem(category) {
-  const { title, imageUrl } = category.category;
+export default function CategoryItem({ category }) {
+  const { title, imageUrl } = category;
 
   return (
     <div className="category-container">
