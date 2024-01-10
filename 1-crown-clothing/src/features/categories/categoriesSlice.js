@@ -1,14 +1,44 @@
-// import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { getCategoriesAndDocuments } from "../../utils/firebase.utils";
 
-const categoriesInitialState = {
+const initialState = {
   categoriesMap: {},
   isLoading: false,
   error: null,
 };
 
+const categoriesSlice = createSlice({
+  name: "categories",
+  initialState,
+  reducers: {
+    setCategoriesMap(state, action) {
+      state.categoriesMap = action.payload;
+    },
+
+    fetchCategoriesStart(state, action) {
+      state.isLoading = true;
+    },
+
+    fetchCategoriesSuccess(state, action) {
+      state.categoriesMap = action.payload;
+      state.isLoading = false;
+    },
+    fetchCategoriesFailed(state, action) {
+      state.error = action.payload;
+    },
+  },
+});
+
+export const {
+  setCategoriesMap,
+  fetchCategoriesStart,
+  fetchCategoriesSuccess,
+  fetchCategoriesFailed,
+} = categoriesSlice.actions;
+export default categoriesSlice.reducer;
+/*
 export default function categoriesReducer(
-  state = categoriesInitialState,
+  state = initialState,
   action
 ) {
   switch (action.type) {
@@ -24,7 +54,6 @@ export default function categoriesReducer(
       return state;
   }
 }
-
 export function setCategoriesMap(categoryMap) {
   return { type: "categories/setCategoriesMap", payLoad: categoryMap };
 }
@@ -53,3 +82,4 @@ export function fetchCategoriesSuccess(categoryMap) {
 export function fetchCategoriesFailed(error) {
   return { type: "categories/fetchCategoriesFailed", payLoad: error };
 }
+*/

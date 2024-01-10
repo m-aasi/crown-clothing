@@ -15,10 +15,10 @@ export default function CheckoutItem({ item }) {
   const dispatch = useDispatch();
 
   function handleInc() {
-    dispatch(addToCartItems(item, cartItems));
+    dispatch(addToCartItems(cartItems, item));
   }
   function handleDec() {
-    dispatch(decreaseToCartItems(item, cartItems));
+    dispatch(decreaseToCartItems(cartItems, item));
   }
 
   function handleRemoveItem() {

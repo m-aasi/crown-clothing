@@ -7,7 +7,7 @@ import {
   getCurrentUser,
   onAuthStateChangedListner,
 } from "./utils/firebase.utils.js";
-import { checkUserSession, setCurrentUser } from "./features/user/userSlice.js";
+import { checkUserSession } from "./features/user/userSlice.js";
 import Directory from "./components/directory/directory.component.jsx";
 import Shop from "./pages/shopPage.jsx";
 import CheckOut from "./pages/checkoutPage.jsx";

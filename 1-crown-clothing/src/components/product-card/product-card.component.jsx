@@ -10,7 +10,9 @@ export default function ProductCard({ product }) {
 
   const { name, id, imageUrl, price } = product;
   function handleClick() {
-    dispatch(addToCartItems(product, cartItems));
+    // dispatch(addToCartItems(cartItems, product));
+    // dispatch(addToCartItems(cartItems, product));
+    dispatch(addToCartItems({ cartItems: cartItems, product }));
   }
   return (
     <>
